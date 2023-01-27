@@ -10,6 +10,7 @@ import { createBrowserRouter ,RouterProvider,Outlet} from "react-router-dom";
 import AboutUs from "./components/About";
 import ContactUs from "./components/ContactUs";
 import RestaurantMenu from "./components/RestaurantMenu";
+import Profile from "./components/Profile";
 
 
 const AppLayOut = () => {
@@ -35,7 +36,13 @@ const appRoutes = createBrowserRouter(
         },
         {
           path:'/about',
-          element:<AboutUs />
+          element:<AboutUs />,
+          children:[
+            {
+            path:'profile',
+            element:<Profile />
+           }
+          ]
         },
         {
           path:'/contact',
