@@ -1,40 +1,75 @@
 * {
     font-family: 'Manrope', sans-serif !important;
-    margin: 0;
-    padding: 0;
-    font-size:15px;
+    box-sizing: border-box;
 }
-.nav{
+.container{
     display: flex;
-    padding: 16px 32px;
+    margin: 10px;
     border-bottom:0.1px solid rgb(225, 225, 225);
     justify-content:space-between;
     align-items:center;
+ 
 }
 
-.nav >li{
+.nav-item{
+    display: flex;
+   
+}
+.nav-item >li{
     list-style: none;
+    margin: 10px;
 }
 
-.nav > li > a{
+.nav-item > li > a{
     text-decoration: none;
 }
 
-.nav li.logo{
-    text-transform: uppercase;
-}
+ #logo{
+    width:100px
+ }
 
-.nav li.logo >a{
-    font-size: 22px;
-    font-weight: bold;
-    letter-spacing: 4px;
-}
+ .restaurant-list{
+    display: flex;
+    flex-wrap: wrap;
+    border: 1px solid black;
+    
+    align-items: center;
+ }
+ 
+ .card{
+    width: 350px;
+    min-height: 450px;
+    background-color: beige;
+    border: 2px solid #000;
+    margin: 23px;
+    list-style: none;
+    
 
-.nav li.searchBar{
-    width: 300px;
-}
-.nav li.searchBar >input{
+ }
+
+ .card-item >.card-image img{
     width: 100%;
-    height: 34px;
+ }
 
-}
+ .card-item {
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+ }
+
+ .card-content >h3{
+    font-size: 20px;
+    font-weight: 500;
+    word-break: break-word;
+ }
+
+ .card-content >h4{
+    color: #686b78;
+    font-size: 13px;
+    margin-top: 4px;
+ }
+
+ .restaurant_menu{
+   display: flex;
+ }
+ 
