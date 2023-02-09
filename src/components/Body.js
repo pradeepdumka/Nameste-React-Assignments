@@ -1,35 +1,36 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import RestaurantCard from "./RestaurantCard";
 import SimmerUI from "./SimmerUI";
- 
-import {Link} from 'react-router-dom'
-import { API_CDN_URL } from "../Constant";
 
-function filterData(searchText, restaurants) {
-  return restaurants.filter((restaurant) =>
-    restaurant?.data?.name?.toLowerCase().includes(searchText.toLowerCase())
-  );
-}
+import { Link } from "react-router-dom";
+import { filterData } from "../utills/helpers";
+import useFetchAllRestaurant from "../utills/useFetchAllRestaurant";
+import useISOnlinne from "../utills/useISOnlinne";
 const Body = () => {
+
   const [searchText, setSearchText] = useState("");
-  const [allRestaurant, setallRestaurant] = useState([]);
-  const [filteredRestaurant, setfilteredRestaurant] = useState([]);
-  const [isShowCards, setIsShowCards] = useState(false);
+ 
+  const {
+    isShowCards,
+    allRestaurant,
+    filteredRestaurant,
+    setfilteredRestaurant,
+  } = useFetchAllRestaurant();
+  
+  const isOnline = useISOnlinne();
+  if (!isOnline) {
+    return (
+      <>
+        <h2>Hey! You are offline ❌</h2>
+        <h3>Pleace check your internet connection</h3>
+      </>
+    );
+  }
 
-  useEffect(() => {
-    fetchRestaurantData();
-  }, []);
 
-  const fetchRestaurantData = async () => {
-    setIsShowCards("false");
-    console.log(isShowCards)
-    let data = await fetch(API_CDN_URL);
-    let RES = await data.json();
-    console.log(RES)
-    setallRestaurant(RES?.data?.cards[2]?.data?.data?.cards);
-    setfilteredRestaurant(RES?.data?.cards[2]?.data?.data?.cards);
-    setIsShowCards("true");
-  };
+  if (!isShowCards) {
+    <h3>No restaurant found in your area! </h3>;
+  }
 
   return filteredRestaurant?.length === 0 && isShowCards ? (
     <SimmerUI />
@@ -49,29 +50,26 @@ const Body = () => {
           onClick={() => {
             let data = filterData(searchText, allRestaurant);
             setfilteredRestaurant(data);
-            if(data.length === 0 ){
-              setIsShowCards(false)
-            }
-            else{
-              setIsShowCards(true)
+            if (data.length === 0) {
+              setIsShowCards(false);
+            } else {
+              setIsShowCards(true);
             }
           }}
         >
           Search
         </button>
       </div>
-
-      {!isShowCards ? (
-        <h3>No recored Found! </h3>
-      ) : (
-        <ul className="restaurant-list">
-          {filteredRestaurant?.map((restaurant) => (
-            <Link to={'/restaurant/' + restaurant?.data?.id} key={restaurant.data.id} ><RestaurantCard {...restaurant.data} /></Link>
-            
-          ))}
-        </ul>
-        
-      )}
+      <ul className="restaurant-list">
+        {filteredRestaurant?.map((restaurant) => (
+          <Link
+            key={restaurant.data.id}
+            to={"/restaurant/" + restaurant?.data?.id}
+          >
+            <RestaurantCard {...restaurant.data} />
+          </Link>
+        ))}
+      </ul>
     </>
   );
 };
