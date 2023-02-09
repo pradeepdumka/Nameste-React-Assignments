@@ -29,9 +29,11 @@ const useFetchAllRestaurant = () => {
 
   return {
     isShowCards,
+    setIsShowCards,
     allRestaurant,
     filteredRestaurant,
     setfilteredRestaurant,
+    
   };
 };
 

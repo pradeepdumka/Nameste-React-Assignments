@@ -12,6 +12,7 @@ const Body = () => {
  
   const {
     isShowCards,
+    setIsShowCards,
     allRestaurant,
     filteredRestaurant,
     setfilteredRestaurant,
