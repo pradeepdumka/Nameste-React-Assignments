@@ -2,13 +2,13 @@
 const SimmerUI = () => {
   return (
     <>
-      <div className="search-container"></div>
-      <div className="restaurant-list">
+      <div className="py-4 bg-gray-300 "></div>
+      <div className="flex flex-wrap justify-center  bg-gray-300 items-start shadow-lg shadow-white pb-12">
      
         {Array(15).fill('').map((d,index) => {
           return (
-            <div className="card" key={index}>
-              <div className="img-section"></div>
+            <div className="flex flex-col p-2 m-4  " key={index}>
+              <div className=" bg-white w-80 min-h-[350px]"></div>
             </div>
           );
         })}

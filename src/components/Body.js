@@ -37,10 +37,11 @@ const Body = () => {
     <SimmerUI />
   ) : (
     <>
-      <div className="search-container">
+      <div className=" flex  bg-gray-300 justify-center items-center py-4" >
+        <div className="flex justify-center items-center">
         <input
           type="text"
-          className="search-input"
+          className="p-2 m-2 w-[500px]  focus:outline-none focus:ring focus:border-blue-500 "
           placeholder="Search"
           value={searchText}
           onChange={(e) => {
@@ -48,6 +49,7 @@ const Body = () => {
           }}
         />
         <button
+        className="bg-blue-400 text-xl hover:bg-yellow-600 p-2 m-2 text-white"
           onClick={() => {
             let data = filterData(searchText, allRestaurant);
             setfilteredRestaurant(data);
@@ -60,10 +62,13 @@ const Body = () => {
         >
           Search
         </button>
+        </div>
+     
       </div>
-      <ul className="restaurant-list">
+      <ul className="flex flex-wrap justify-center bg-gray-300 items-start shadow-lg shadow-white pb-12">
         {filteredRestaurant?.map((restaurant) => (
           <Link
+          className="m-4"
             key={restaurant.data.id}
             to={"/restaurant/" + restaurant?.data?.id}
           >

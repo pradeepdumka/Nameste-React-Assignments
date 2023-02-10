@@ -10,7 +10,7 @@ const RestaurantMenu = () => {
     "Loading..."
   ) : (
     <>
-      <div className="restaurant_menu">
+      <div className="flex px-4 justify-evenly">
         <div>
           <h1>{restaurant?.name}</h1>
           <img src={IMG_CDN_URL + restaurant?.cloudinaryImageId} />
