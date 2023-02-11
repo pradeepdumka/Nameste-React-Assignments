@@ -1,66 +1,87 @@
-import React,{lazy,Suspense} from "react";
+import React, { lazy, Suspense, useState } from "react";
 import ReactDOM from "react-dom/client";
 
 import Header from "./components/Header";
 import Body from "./components/Body";
 import Footer from "./components/Footer";
 import Error from "./components/Error";
-
-import { createBrowserRouter ,RouterProvider,Outlet} from "react-router-dom";
-import AboutUs from "./components/About";
+import { Provider } from "react-redux";
+import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import ContactUs from "./components/ContactUs";
 import RestaurantMenu from "./components/RestaurantMenu";
 import Profile from "./components/Profile";
-import useISOnlinne from "./utills/useISOnlinne";
+import UserContext from "./utills/useContext";
+import store from "./utills/store";
+import CartFoodVilla from "./components/CartFoodVilla";
 
-const About = lazy(()=>import('./components/About'))
+
+const InstaMartComponent = lazy(() => import("./components/InstaMart"));
+const About = lazy(() => import("./components/About"));
+
 const AppLayOut = () => {
-  const isOnline = useISOnlinne();
-console.log(isOnline)
+  const [user, setUser] = useState({
+    name: "Mr Pradeep",
+    email: "pradeepdumka007@gmail.com",
+  });
+
   return (
-    <>
-      <Header />
-       <Outlet />
-      <Footer />
-    </>
+    <Provider store={store}>
+      <UserContext.Provider value={{ user: user ,setUser:setUser }}>
+        <Header />
+        <Outlet />
+        <Footer />
+      </UserContext.Provider>
+    </Provider>
   );
 };
 
-const appRoutes = createBrowserRouter(
-  [
-    {
-      path:'/',
-      element:<AppLayOut />,
-      errorElement:<Error />,
-      children:[
-        {
-          path:'',
-          element:<Body />
-        },
-        {
-          path:'/about',
-          element:<Suspense fallback={<h1>Lazy Loading Hear....</h1>}>
+const appRoutes = createBrowserRouter([
+  {
+    path: "/",
+    element: <AppLayOut />,
+    errorElement: <Error />,
+    children: [
+      {
+        path: "",
+        element: <Body name={"Pradeep "} />,
+      },
+      {
+        path: "/about",
+        element: (
+          <Suspense fallback={<h1>Lazy Loading Hear....</h1>}>
             <About />
-          </Suspense>,
-          children:[
-            {
-            path:'profile',
-            element:<Profile />
-           }
-          ]
-        },
-        {
-          path:'/contact',
-          element:<ContactUs />
-        },
-        {
-          path:'/restaurant/:id',
-          element:<RestaurantMenu />
-        }
-      ]
-    }
-    
-  ]);
+          </Suspense>
+        ),
+        children: [
+          {
+            path: "profile",
+            element: <Profile />,
+          },
+        ],
+      },
+      {
+        path: "/contact",
+        element: <ContactUs />,
+      },
+      {
+        path: "/restaurant/:id",
+        element: <RestaurantMenu />,
+      },
+      {
+        path: "/instamart",
+        element: (
+          <Suspense fallback={<h1>Instamart is Now Loading .....</h1>}>
+            <InstaMartComponent />
+          </Suspense>
+        ),
+      },
+      {
+        path: "/cart",
+        element:<CartFoodVilla />
+      },
+    ],
+  },
+]);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(<RouterProvider router= {appRoutes}/>);
+root.render(<RouterProvider router={appRoutes} />);

@@ -1,4 +1,7 @@
-import {Link} from 'react-router-dom'
+import {Link} from 'react-router-dom';
+import { useContext } from 'react';
+import UserContext from '../utills/useContext';
+import {useSelector} from 'react-redux';
 const Title = () => {
     return (
       <img
@@ -11,6 +14,9 @@ const Title = () => {
   };
   
   const Header  = () => {
+   const {user} = useContext(UserContext);
+   const cartItems = useSelector((store)=>store.cart.items);
+   console.log(cartItems)
     return (
       <div className="flex justify-between py-2 bg-blue-400 shadow-md">
         <Title />
@@ -18,13 +24,20 @@ const Title = () => {
           <li className=' text-white  text-xl uppercase p-2 m-2 hover:bg-yellow-600 hover:underline'>
             <Link to='/' className=''>Home</Link>
           </li>
-          <li className=' text-white  uppercase text-xl p-2 m-2 hover:bg-yellow-600 hover:underline text-white p-2 m-2'>
+          <li className='text-white  uppercase text-xl p-2 m-2 hover:bg-yellow-600 hover:underline'>
           <Link to='/about'>About</Link>
           </li>
-          <li className=' text-white uppercase text-xl p-2 m-2 hover:bg-yellow-600 hover:underline text-white'>
+          <li className=' text-white uppercase text-xl p-2 m-2 hover:bg-yellow-600 hover:underline'>
             <Link to='/contact'>Contact</Link>  
           </li>
+          <li className=' text-white uppercase text-xl p-2 m-2 hover:bg-yellow-600 hover:underline'>
+            <Link to='/instamart'>InstaMart</Link>  
+          </li>
+          <li className=' text-white uppercase text-xl p-2 m-2 hover:bg-yellow-600 hover:underline'>
+          <Link to='/cart'>Cart ( {cartItems.length} ) Items</Link>
+          </li>
         </ul>
+        <h4> {user.name}/ {user.email}</h4>
       </div>
     );
   };
