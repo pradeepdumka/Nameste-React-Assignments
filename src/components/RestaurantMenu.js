@@ -16,6 +16,7 @@ const RestaurantMenu = () => {
     "Loading..."
   ) : (
     <>
+          <div className=" flex flex-col bg-[#171a29] h-44 md:h-64 justify-center items-center shadow-lg mt-10"></div>
       <div className="flex py-4 justify-evenly  ">
         <div className="bg-gray-300 mt-6 h-[600px]">
           

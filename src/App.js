@@ -14,7 +14,6 @@ import UserContext from "./utills/useContext";
 import store from "./utills/store";
 import CartFoodVilla from "./components/CartFoodVilla";
 
-
 const InstaMartComponent = lazy(() => import("./components/InstaMart"));
 const About = lazy(() => import("./components/About"));
 
@@ -26,7 +25,7 @@ const AppLayOut = () => {
 
   return (
     <Provider store={store}>
-      <UserContext.Provider value={{ user: user ,setUser:setUser }}>
+      <UserContext.Provider value={{ user: user, setUser: setUser }}>
         <Header />
         <Outlet />
         <Footer />
@@ -77,7 +76,7 @@ const appRoutes = createBrowserRouter([
       },
       {
         path: "/cart",
-        element:<CartFoodVilla />
+        element: <CartFoodVilla />,
       },
     ],
   },

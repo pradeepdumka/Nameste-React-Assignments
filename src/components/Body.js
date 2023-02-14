@@ -6,12 +6,13 @@ import { Link } from "react-router-dom";
 import { filterData } from "../utills/helpers";
 import useFetchAllRestaurant from "../utills/useFetchAllRestaurant";
 import useISOnlinne from "../utills/useISOnlinne";
-
+import { Carousel } from "@trendyol-js/react-carousel";
 import { useContext } from "react";
 import UserContext from "../utills/useContext";
+
 const Body = ({ name }) => {
   const [searchText, setSearchText] = useState("");
-  const { user, setUser } = useContext(UserContext);
+  // const { user, setUser } = useContext(UserContext);
   const {
     isShowCards,
     setIsShowCards,
@@ -19,7 +20,7 @@ const Body = ({ name }) => {
     filteredRestaurant,
     setfilteredRestaurant,
   } = useFetchAllRestaurant();
-
+  console.log(allRestaurant);
   const isOnline = useISOnlinne();
   if (!isOnline) {
     return (
@@ -38,12 +39,14 @@ const Body = ({ name }) => {
     <SimmerUI />
   ) : (
     <>
-      <h1>{name}</h1>
-      <div className=" flex  bg-gray-300 justify-center items-center py-4">
+      <div className=" flex flex-col bg-[#171a29] h-44 md:h-64 justify-center items-center shadow-lg mt-10">
+        <h1 className="text-white text-[15px] sm:text-xl md:text-2xl m-3  ">
+          Nameste are you hungry! <span>Find Your favourite food hear.</span>
+        </h1>
         <div className="flex justify-center items-center">
           <input
             type="text"
-            className="p-2 m-2 w-[500px]  focus:outline-none focus:ring focus:border-blue-500 "
+            className="p-2  w-[275px]  sm:w-[500px] focus:outline-none  "
             placeholder="Search"
             value={searchText}
             onChange={(e) => {
@@ -51,7 +54,7 @@ const Body = ({ name }) => {
             }}
           />
           <button
-            className="bg-blue-400 text-xl hover:bg-yellow-600 p-2 m-2 text-white"
+            className="bg-blue-400 text-xl hover:bg-yellow-600  p-2 rounded-r-sm   text-white"
             onClick={() => {
               let data = filterData(searchText, allRestaurant);
               setfilteredRestaurant(data);
@@ -62,9 +65,9 @@ const Body = ({ name }) => {
               }
             }}
           >
-            Search
+            Find
           </button>
-          <input
+          {/* <input
             type="text"
             value={user.name}
             onChange={(e) => setUser({ ...user, name: e.target.value })}
@@ -73,20 +76,21 @@ const Body = ({ name }) => {
             type="text"
             value={user.email}
             onChange={(e) =>  setUser({ ...user, email: e.target.value })}
-          />
+          /> */}
         </div>
       </div>
-      <ul className="flex flex-wrap justify-center bg-gray-300 items-start shadow-lg shadow-white pb-12">
-        {filteredRestaurant?.map((restaurant) => (
-          <Link
-            className="m-4"
-            key={restaurant.data.id}
-            to={"/restaurant/" + restaurant?.data?.id}
-          >
-            <RestaurantCard {...restaurant.data} pname={name} />
-          </Link>
-        ))}
-      </ul>
+      <div className="max-w-6xl mx-auto px-4">
+        <ul className="flex flex-wrap justify-center  items-start  py-12">
+          {filteredRestaurant?.map((restaurant) => (
+            <Link
+              key={restaurant.data.id}
+              to={"/restaurant/" + restaurant?.data?.id}
+            >
+              <RestaurantCard {...restaurant.data} pname={name} />
+            </Link>
+          ))}
+        </ul>
+      </div>
     </>
   );
 };

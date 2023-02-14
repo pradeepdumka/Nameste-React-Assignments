@@ -25,12 +25,12 @@ class AboutUs extends Component {
   render() {
     console.log('Parent Render!')
     return (
-      <>
+      <div className=" flex flex-col bg-[#171a29] h-44 md:h-64 justify-center items-center shadow-lg mt-10">
         <h1>About Us Page</h1>
         
         <ProfileC name="FirstChild" age="23" />
         <ProfileC name="SecondChild" age="23" />
-      </>
+      </div>
     );
   }
 }
