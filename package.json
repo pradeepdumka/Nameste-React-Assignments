@@ -2,6 +2,7 @@
   "name": "react-study",
   "version": "1.0.0",
   "description": "",
+  "proxy": "https://www.swiggy.com/",
   "scripts": {
     "start": "parcel index.html",
     "build": "parcel build index.html",
@@ -23,5 +24,6 @@
     "react-icons": "^4.7.1",
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.7.0"
-  }
+  },
+
 }
