@@ -26,7 +26,7 @@ const Header = () => {
   const { pathname } = location;
   const splitLocation = pathname.split("/");
   return (
-    <div class="relative">
+    <div className="relative">
       <nav className="bg-blue-400 shadow-lg  fixed top-0 left-0 right-0">
         <div className="max-w-6xl mx-auto px-4">
           <div className="flex justify-between">
