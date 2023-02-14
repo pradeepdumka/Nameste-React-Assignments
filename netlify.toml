@@ -1,10 +1,10 @@
 [[redirects]]
-  from = "/*"
-  to = "/index.html"
+  from = "/"
+  to = "https://www.swiggy.com/dapi/restaurants/list/v5?lat=28.4594965&lng=77.0266383&page_type=DESKTOP_WEB_LISTING"
   status = 200
-
+  force = true
+  headers = {X-From = "Netlify"}
 [[headers]]
-  # Define which paths this specific [[headers]] block will cover.
-  for = "https://www.swiggy.com/*"
-    [headers.values]
+  for = "/*"
+  [headers.values]
     Access-Control-Allow-Origin = "*"
