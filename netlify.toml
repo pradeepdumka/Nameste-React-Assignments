@@ -5,6 +5,6 @@
 
 [[headers]]
   # Define which paths this specific [[headers]] block will cover.
-  for = "https://www.swiggy.com/dapi/*"
+  for = "https://www.swiggy.com/*"
     [headers.values]
     Access-Control-Allow-Origin = "*"
